@@ -1,0 +1,6 @@
+# 只上傳下面這幾個文件，其他（源文件、預覽、工具腳本、個人作品片段）都留在本地
+*
+!.gitignore
+!README.md
+!imessage-skin.paste.css
+!imessage-body.paste.html

@@ -1,0 +1,323 @@
+.phone {
+  display: block;
+  max-width: 360px;
+  margin: 1.5em auto;
+  background: #ffffff;
+  border: 1px solid #d1d1d6;
+  border-radius: 28px;
+  overflow: hidden;
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: 0.4px;
+  color: #000000;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+.phone br {
+  display: none;
+}
+.phone p {
+  margin: 0;
+  padding: 0;
+}
+.phone .head {
+  display: block;
+  padding: 10px 12px 8px;
+  background: #f6f6f6;
+  border-bottom: 1px solid #d1d1d6;
+  text-align: center;
+}
+.phone .avatar {
+  display: block;
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 3px;
+  border-radius: 50%;
+  background: linear-gradient(#a5a9b3, #868a94);
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 38px;
+}
+.phone .name {
+  display: block;
+  font-size: 12px;
+  color: #000000;
+}
+.phone .chat {
+  display: block;
+  padding: 8px 12px 14px;
+}
+.phone .time {
+  display: block;
+  margin: 10px 0 6px;
+  font-size: 11px;
+  color: #8e8e93;
+  text-align: center;
+}
+.phone .msg {
+  display: block;
+  position: relative;
+  width: fit-content;
+  max-width: 75%;
+  margin: 0 0 12px;
+  padding: 7px 12px;
+  border-radius: 18px;
+  word-wrap: break-word;
+  text-align: left;
+}
+.phone .msg.in {
+  margin-right: auto;
+  background: #e9e9eb;
+  color: #000000;
+}
+.phone .msg.out {
+  margin-left: auto;
+  background: #0a84ff;
+  color: #ffffff;
+}
+.phone .msg::before,
+.phone .msg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 20px;
+}
+.phone .msg::before {
+  z-index: 0;
+  width: 20px;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+.phone .msg::after {
+  z-index: 1;
+  width: 10px;
+  background: #ffffff;
+}
+.phone .msg.in::before {
+  left: -7px;
+  background: #e9e9eb;
+  border-bottom-right-radius: 16px;
+}
+.phone .msg.in::after {
+  left: -10px;
+  border-bottom-right-radius: 10px;
+}
+.phone .msg.out::before {
+  right: -7px;
+  background: #0a84ff;
+  border-bottom-left-radius: 16px;
+}
+.phone .msg.out::after {
+  right: -10px;
+  border-bottom-left-radius: 10px;
+}
+.phone .read {
+  display: block;
+  margin: 0 0 12px;
+  font-size: 11px;
+  color: #8e8e93;
+  text-align: right;
+}
+.phone .step {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+.phone .step > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+}
+.phone .step > summary::-webkit-details-marker {
+  display: none;
+}
+.phone .step > summary .msg,
+.phone .step > summary .time,
+.phone .step > summary .read {
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px) scale(0.85);
+  transition: max-height 0.35s ease, padding 0.35s ease, margin 0.35s ease, opacity 0.3s ease, transform 0.35s ease;
+}
+.phone .step > summary .msg.in {
+  transform-origin: left bottom;
+}
+.phone .step > summary .msg.out {
+  transform-origin: right bottom;
+}
+.phone .step[open] > summary .msg {
+  max-height: 40em;
+  margin-bottom: 12px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  overflow: visible;
+  opacity: 1;
+  transform: none;
+}
+.phone .step[open] > summary .time {
+  max-height: 3em;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  opacity: 1;
+  transform: none;
+}
+.phone .step[open] > summary .read {
+  max-height: 3em;
+  margin-bottom: 12px;
+  opacity: 1;
+  transform: none;
+}
+.phone .step[open] > summary .msg + .msg {
+  transition-delay: 0.5s;
+}
+.phone .step[open] > summary .msg + .msg + .msg {
+  transition-delay: 1s;
+}
+.phone .step[open] > summary .msg + .msg + .msg + .msg {
+  transition-delay: 1.5s;
+}
+.phone .step[open] > summary .read {
+  transition-delay: 0.6s;
+}
+.phone .step[open] > summary > .msg.in:has(+ .msg.in),
+.phone .step[open] > summary > .msg.out:has(+ .msg.out),
+.phone .step:has(> .step[open] > summary > .typing + .msg.in) > summary > .msg.in:not(:has(~ .msg)),
+.phone .step:has(> .step[open] > summary > .typing + .msg.out) > summary > .msg.out:not(:has(~ .msg)) {
+  margin-bottom: 3px;
+}
+.phone .step[open] > summary > .msg.in:has(+ .msg.in)::before,
+.phone .step[open] > summary > .msg.out:has(+ .msg.out)::before,
+.phone .step:has(> .step[open] > summary > .typing + .msg.in) > summary > .msg.in:not(:has(~ .msg))::before,
+.phone .step:has(> .step[open] > summary > .typing + .msg.out) > summary > .msg.out:not(:has(~ .msg))::before {
+  opacity: 0;
+}
+.phone .step[open] > summary > .msg:has(+ .read) {
+  margin-bottom: 2px;
+}
+.phone .typing {
+  display: block;
+  width: fit-content;
+  max-height: 3em;
+  margin: 0;
+  padding: 6px 14px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #e9e9eb;
+  color: #8e8e93;
+  font-size: 14px;
+  letter-spacing: 2px;
+  opacity: 1;
+  transition: max-height 0.25s ease, padding 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+.phone .typing::before {
+  content: '•••';
+}
+.phone .typing.out {
+  margin-left: auto;
+  background: #0a84ff;
+  color: #ffffff;
+  opacity: 0.55;
+}
+.phone .step > summary:hover .typing {
+  transform: scale(1.08);
+}
+.phone .step[open] > summary .typing {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+}
+.phone .hint {
+  display: block;
+  margin-top: 4px;
+  max-height: 2em;
+  overflow: hidden;
+  font-size: 11px;
+  color: #8e8e93;
+  opacity: 1;
+  transition: opacity 0.2s ease, max-height 0.25s ease, margin 0.25s ease;
+}
+.phone .typing.out ~ .hint {
+  text-align: right;
+}
+.phone .step[open] > summary .hint {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+}
+.phone .step[open]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.phone .step > .step {
+  z-index: 2;
+}
+.notify {
+  display: block;
+  max-width: 360px;
+  margin: 1.5em auto;
+  font-family: -apple-system, 'Helvetica Neue', 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', sans-serif;
+}
+.notify > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+}
+.notify > summary::-webkit-details-marker {
+  display: none;
+}
+.notify .banner {
+  display: block;
+  max-height: 8em;
+  padding: 10px 14px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(30, 30, 32, 0.88);
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.35;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  opacity: 1;
+  transform: none;
+  transition: max-height 0.35s ease, padding 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+.notify > summary:hover .banner {
+  transform: scale(1.02);
+}
+.notify .app {
+  display: block;
+  font-size: 11px;
+  color: #c7c7cc;
+  letter-spacing: 0.5px;
+}
+.notify .from {
+  display: block;
+  font-weight: bold;
+}
+.notify .preview {
+  display: block;
+  color: #e5e5ea;
+}
+.notify[open] > summary .banner {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  transform: translateY(-16px) scale(0.95);
+}
+.notify .phone {
+  margin-top: 0.5em;
+}
