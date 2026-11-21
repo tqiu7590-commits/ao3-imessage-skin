@@ -36,7 +36,7 @@
 正文编辑器切到 **HTML** 模式，照 `imessage-body.paste.html` 的结构把对话贴进去。
 
 ## HTML 结构
-
+```
 </details>
 </details>
 </div>
